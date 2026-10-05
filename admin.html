@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Notice Untangler</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            NU
+        </div>
+
+        <div>
+            <h2>Notice Untangler</h2>
+            <span>College Admin Portal</span>
+        </div>
+
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="student.html">
+            Student View
+        </a>
+
+        <a href="login.html" class="login-btn">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<main class="dashboard">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="small-label">
+                ADMIN DASHBOARD
+            </span>
+
+            <h1>
+                Manage College Notices
+            </h1>
+
+            <p>
+                Extract, verify, target and publish important
+                college information.
+            </p>
+
+        </div>
+
+        <div class="admin-badge">
+            👨‍🏫 Teacher Admin
+        </div>
+
+    </div>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <span>📄</span>
+
+            <div>
+                <small>Total Notices</small>
+                <strong>128</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>⏳</span>
+
+            <div>
+                <small>Pending Review</small>
+                <strong>07</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>🚨</span>
+
+            <div>
+                <small>Upcoming Deadlines</small>
+                <strong>12</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>👥</span>
+
+            <div>
+                <small>Students</small>
+                <strong>1,842</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NOTICE CREATOR ================= -->
+
+    <section class="dashboard-card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="small-label">
+                    STEP 1
+                </span>
+
+                <h2>
+                    Add Notice
+                </h2>
+
+            </div>
+
+            <span class="demo-label">
+                PROTOTYPE
+            </span>
+
+        </div>
+
+
+        <div class="upload-options">
+
+            <div class="upload-box">
+
+                <span class="upload-icon">
+                    📄
+                </span>
+
+                <h3>
+                    Upload PDF
+                </h3>
+
+                <p>
+                    Upload a college circular or notice.
+                </p>
+
+                <input
+                    type="file"
+                    id="pdfInput"
+                    accept=".pdf"
+                >
+
+            </div>
+
+
+            <div class="upload-box">
+
+                <span class="upload-icon">
+                    🖼️
+                </span>
+
+                <h3>
+                    Upload Image
+                </h3>
+
+                <p>
+                    Upload a notice-board photo.
+                </p>
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="or-line">
+            OR
+        </div>
+
+
+        <label class="field-label">
+            Paste Notice Text
+        </label>
+
+        <textarea
+            id="noticeText"
+            class="notice-input"
+            placeholder="Paste the complete college notice here...
+
+Example:
+BCA 2nd Year students are informed that the examination form must be submitted before 18 October 2026."
+        ></textarea>
+
+
+        <button
+            class="primary-btn"
+            onclick="extractNotice()"
+        >
+            ✨ Extract with AI
+        </button>
+
+    </section>
+
+
+    <!-- ================= AI EXTRACTION ================= -->
+
+    <section
+        class="dashboard-card"
+        id="extractionSection"
+        style="display:none;"
+    >
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="small-label">
+                    STEP 2
+                </span>
+
+                <h2>
+                    AI Extracted Information
+                </h2>
+
+            </div>
+
+            <div class="confidence">
+                AI Confidence:
+                <strong id="confidence">
+                    94%
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="ai-note">
+            ✨ AI has identified the following information.
+            Admin can edit anything before publishing.
+        </div>
+
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Notice Title</label>
+
+                <input
+                    id="title"
+                    value="Examination Form Submission"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>Deadline</label>
+
+                <input
+                    id="deadline"
+                    value="18 October 2026"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>Department</label>
+
+                <select id="department">
+
+                    <option>BCA</option>
+                    <option>BBA</option>
+                    <option>B.Tech</option>
+                    <option>MCA</option>
+                    <option>All Departments</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Year</label>
+
+                <select id="year">
+
+                    <option>1st Year</option>
+                    <option selected>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>All Years</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Semester</label>
+
+                <select id="semester">
+
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                    <option>Semester 3</option>
+                    <option>Semester 4</option>
+                    <option>Semester 5</option>
+                    <option>Semester 6</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Section</label>
+
+                <select id="section">
+
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>All Sections</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="full-field">
+
+                <label>Required Action</label>
+
+                <input
+                    id="action"
+                    value="Submit examination form"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>Priority</label>
+
+                <select id="priority">
+
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option selected>High</option>
+                    <option>Urgent</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="secondary-btn"
+                onclick="editNotice()"
+            >
+                ✏️ Edit Fields
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="goToTargeting()"
+            >
+                Verify & Continue →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TARGETING ================= -->
+
+    <section
+        class="dashboard-card"
+        id="targetSection"
+        style="display:none;"
+    >
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="small-label">
+                    STEP 3
+                </span>
+
+                <h2>
+                    Select Target Audience
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="target-info">
+
+            <p>
+                🎯 Choose exactly which students should receive
+                this notice.
+            </p>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Department</label>
+
+                <select id="targetDept" onchange="updateCount()">
+
+                    <option>BCA</option>
+                    <option>BBA</option>
+                    <option>B.Tech</option>
+                    <option>MCA</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Year</label>
+
+                <select id="targetYear" onchange="updateCount()">
+
+                    <option>1st Year</option>
+                    <option selected>2nd Year</option>
+                    <option>3rd Year</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Semester</label>
+
+                <select id="targetSemester" onchange="updateCount()">
+
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                    <option>Semester 3</option>
+                    <option selected>Semester 4</option>
+                    <option>Semester 5</option>
+                    <option>Semester 6</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Section</label>
+
+                <select id="targetSection" onchange="updateCount()">
+
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>All Sections</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="audience-count">
+
+            <span>
+                👥 Students affected
+            </span>
+
+            <strong id="studentCount">
+                184
+            </strong>
+
+        </div>
+
+
+        <div class="preview-box">
+
+            <strong>
+                Audience Preview
+            </strong>
+
+            <p id="audiencePreview">
+                BCA → 2nd Year → Semester 4 → Section A
+            </p>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="showApproval()"
+        >
+            Continue to Approval →
+        </button>
+
+    </section>
+
+
+    <!-- ================= APPROVAL ================= -->
+
+    <section
+        class="dashboard-card"
+        id="approvalSection"
+        style="display:none;"
+    >
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="small-label">
+                    STEP 4
+                </span>
+
+                <h2>
+                    Review & Publish
+                </h2>
+
+            </div>
+
+            <span class="approval-status">
+                ✓ READY
+            </span>
+
+        </div>
+
+
+        <div class="publish-preview">
+
+            <div class="preview-header">
+
+                <span class="priority high">
+                    HIGH PRIORITY
+                </span>
+
+                <span>
+                    Draft Notice
+                </span>
+
+            </div>
+
+
+            <h2 id="previewTitle">
+                Examination Form Submission
+            </h2>
+
+
+            <div class="preview-details">
+
+                <div>
+                    <small>Audience</small>
+                    <strong id="previewAudience">
+                        BCA 2nd Year
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Deadline</small>
+                    <strong id="previewDeadline">
+                        18 October 2026
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Action</small>
+                    <strong id="previewAction">
+                        Submit examination form
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="approval-warning">
+
+            🔒
+            Teacher/Admin approval is required before
+            this notice becomes visible to students.
+
+        </div>
+
+
+        <button
+            class="primary-btn publish-btn"
+            onclick="publishNotice()"
+        >
+            ✓ Approve & Publish Notice
+        </button>
+
+    </section>
+
+
+    <!-- ================= PUBLISHED ================= -->
+
+    <section
+        class="dashboard-card"
+        id="publishedSection"
+        style="display:none;"
+    >
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Notice Published Successfully
+            </h2>
+
+            <p>
+                The notice has been published to the selected
+                student audience.
+            </p>
+
+        </div>
+
+
+        <div class="delivery-grid">
+
+            <div>
+
+                <span>📧</span>
+
+                <strong>
+                    College Email
+                </strong>
+
+                <small>
+                    184 queued
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <span>📱</span>
+
+                <strong>
+                    Telegram
+                </strong>
+
+                <small>
+                    Ready
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <span>🌐</span>
+
+                <strong>
+                    Student Dashboard
+                </strong>
+
+                <small>
+                    Updated
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="change-detection">
+
+            <div>
+
+                <span class="small-label">
+                    DEADLINE MONITOR
+                </span>
+
+                <h3>
+                    Detect future changes automatically
+                </h3>
+
+                <p>
+                    If a new notice changes the deadline,
+                    affected students can be alerted.
+                </p>
+
+            </div>
+
+
+            <button
+                class="secondary-btn"
+                onclick="detectChange()"
+            >
+                🔍 Demo Change Detection
+            </button>
+
+        </div>
+
+
+        <div
+            id="changeResult"
+            class="change-result"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
